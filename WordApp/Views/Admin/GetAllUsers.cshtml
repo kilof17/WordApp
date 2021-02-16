@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WordApp.Models.User>
+    @using GridMvc.Html
+
+@{
+    ViewBag.Title = "GetAllUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="align-center">Lista użytowników</h2>
+<br />
+
+<div class="code-cut col-12">
+    @Html.Grid(Model).Columns(Columns =>
+{
+    Columns.Add(c => c.Nickname).Titled("Użytkownik").Filterable(true);
+    Columns.Add(c => c.Forename).Titled("Imię").Filterable(true);
+    Columns.Add(c => c.Surname).Titled("Nazwisko").Filterable(true);
+    Columns.Add(c => c.Email).Titled("Email").Filterable(true);
+    Columns.Add(c => c.Role).Titled("Ranga").Filterable(true);
+    Columns.Add(c => c.EmailVerification).Titled("Aktywowany?").Filterable(true);
+    Columns.Add().Encoded(false).Sanitized(false)
+    .RenderValueAs(p => Html.ActionLink("Edytuj", "Edit","Admin" ,new { id = p.Id },new {@class="btn btn-dark" }));
+    Columns.Add().Encoded(false).Sanitized(false)
+    .RenderValueAs(p => Html.ActionLink("Usuń", "Delete", "Admin", new { id = p.Id }, 
+    new { onclick = "return confirm('Czy jesteś pewien, że chesz usunąć wybranego użytkownika wraz z jego danymi?');" , @class="btn btn-danger"}));
+
+}).WithPaging(7).Sortable(true)
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+@section Scripts{
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    <script src="~/Scripts/gridmvc.js"></script>
+}

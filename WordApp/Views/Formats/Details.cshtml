@@ -1,0 +1,43 @@
+﻿@model WordApp.Models.Format
+
+@{
+    ViewBag.Title = "Szczegóły";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Format</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Displayed_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Displayed_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Format_String)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Format_String)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Format_Int)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Format_Int)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Powrót do listy", "Index")
+</p>

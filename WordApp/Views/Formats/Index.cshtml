@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WordApp.Models.Format>
+
+@{
+    ViewBag.Title = "Formaty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Formaty zapisu</h2>
+
+<p>
+    @Html.ActionLink("Dodaj", "Create",new { }, new { @class = "btn btn-success" })
+</p>
+<div  class="code-cut">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Displayed_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Format_String)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Format_Int)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Displayed_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Format_String)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Format_Int)
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-dark" })
+                </td>
+                <td>
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

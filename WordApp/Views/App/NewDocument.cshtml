@@ -1,0 +1,138 @@
+﻿@model  WordApp.ViewModels.AppNewDocumentViewModel
+
+@{
+    ViewBag.Title = "Nowy dokument";
+}
+
+
+<div class="jumbotron jumbotron-fluid">
+    <h1 class="align-center">@ViewBag.Template</h1>
+</div>
+
+@using (Html.BeginForm("Save", "App", FormMethod.Post, htmlAttributes: new { @id = "form-sbm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        <div>
+            <input name="templateName" type="hidden" value="@ViewBag.Template">
+
+            @for (var i = 0; i < Model.AllControls.Count; i++)
+            {
+                <div>
+                    @Html.HiddenFor(m => m.AllControls[i].ControlId)
+                    @Html.HiddenFor(m => m.AllControls[i].Type)
+                    @Html.HiddenFor(m => m.AllControls[i].Title)
+                    @Html.HiddenFor(m => m.AllControls[i].Tag)
+                    @{
+                        if (Model.AllControls[i].Type == 1 && Model.AllControls[i].Tag.Contains("//comment"))
+                        {
+                            <div class=" alert alert-dark">
+                                @Model.AllControls[i].Title
+                            </div>
+                        }
+                        else if (Model.AllControls[i].Type == 1 && Model.AllControls[i].Multiline)
+                        {
+                            <div class="form-group row alert-light">
+                                @Html.LabelFor(m => m.AllControls[i].Title, Model.AllControls[i].Title, htmlAttributes: new { @class = "col-sm-4 col-form-label" })
+                                <div class="col-md-8">
+                                    @Html.TextAreaFor(m => m.AllControls[i].Text, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        }
+                        else if (Model.AllControls[i].Type == 1)
+                        {
+                            <div class="form-group row alert-light">
+                                @Html.LabelFor(m => m.AllControls[i].Title, Model.AllControls[i].Title, htmlAttributes: new { @class = "col-sm-4 col-form-label" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(m => m.AllControls[i].Text, new { htmlAttributes = new { @class = "form-control", Style = "max-width: 100%;" } })
+                                </div>
+                            </div>
+                        }
+                        else if (Model.AllControls[i].Type == 3)
+                        {
+                            <div class="form-group row alert-light">
+                                @Html.LabelFor(m => m.AllControls[i].Title, Model.AllControls[i].Title, htmlAttributes: new { @class = "col-sm-4 col-form-label" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(m => Model.AllControls[i].Text, new SelectList(Model.AllControls[i].Dropdown, Model.AllControls[i].Text), "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        }
+                        else if (Model.AllControls[i].Type == 8)
+                        {
+                            <div class="form-group row alert-light">
+                                @Html.LabelFor(m => m.AllControls[i].Title, Model.AllControls[i].Title, htmlAttributes: new { @class = "col-sm-4 col-form-label" })
+                                <div class="col-md-8">
+                                    @Html.CheckBoxFor(m => m.AllControls[i].Checked, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        </div>
+        <div class="tools">
+            <a class=" tool erase" onclick="cl()"></a>
+            <input class="tool restore" type="reset" value="" />
+        </div>
+    </div>
+
+    <div class="modal fade" id="selectFormat">
+        <div class="modal-dialog vertical-middle">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Wybierz format zapisu</h3>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                </div>
+                <div class="modal-body">
+                    @for (int i = 0; i < Model.AllFormats.Count; i++)
+                    {
+                        int id = Model.AllFormats[i].Id;
+                        <div>
+                            @if (i == 0)
+                            {@Html.RadioButton("selected", id, true) }
+                        else
+                        { @Html.RadioButton("selected", id)}
+                            @Model.AllFormats[i].Displayed_Name
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <div id="save-btn" class="btn btn-dark">Zapisz</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="page-footer font-small blue fixed-bottom">
+        <div class="footer text-center py-3 align-center">
+            <a href="#" class="btn btn-dark" data-toggle="modal" data-target="#selectFormat">Zapisz</a>
+
+        </div>
+    </footer>
+}
+@section JQuery{
+    <script type="text/javascript">
+        function cl() {
+            $(':input')
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .prop('checked', false)
+                .prop('selected', false);
+        }
+
+    </script>
+}
+
+<script type="text/javascript">
+    $('#save-btn').click(function () {
+        $('#form-sbm').submit()
+        $('#save-btn').html('<div class="btn btn-dark"><span class="spinner-border spinner-border-sm mr-2"></span> Zapisuję...</div>')
+            .attr('disabled', true);
+    });
+</script>
+
+
+
+

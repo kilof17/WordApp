@@ -1,0 +1,48 @@
+﻿@model WordApp.Models.Format
+
+@{
+    ViewBag.Title = "Usuń Format";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Czy jesteś pewien że chesz usunąć dany format?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Displayed_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Displayed_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Format_String)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Format_String)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Format_Int)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Format_Int)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger " /> 
+            @Html.ActionLink("Potrót do listy", "Index",new { },new { @class = "btn btn-success" })
+        </div>
+    }
+</div>

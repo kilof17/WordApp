@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Zapisz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="alert alert-success" >
+        <h2> @ViewBag.Message  @Html.ActionLink("Pobierz", "Download", "Files", new { id = ViewBag.InfoHash , type = ViewBag.Type }, new { @class = "btn btn-success" })</h2>                
+    </div>
+

@@ -1,0 +1,147 @@
+﻿body { padding-bottom: 20px;}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select { max-width: 280px;}
+
+textarea {
+    width: 100%;
+    height: 7em;
+}
+
+.navbar-brand { padding: 10px 15px; }
+
+.alert { text-align: center; }
+
+.inline {
+    display: inline !important;
+    margin-bottom: 5% !important;
+}
+
+.align-center { text-align: center !important; }
+
+
+.field-validation-error { color: red;}
+
+.input-validation-error { border: 1px solid red !important; }
+
+h1 { font-family: initial; }
+
+.upload-btn { margin-bottom: 50px; }
+
+.upload {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    max-height: 50%;
+    height: 230px;
+    width: 300px;
+    background-image: url('../Images/upload.png');
+    background-size: cover;
+    cursor: grabbing;
+    margin-bottom: 20px;
+}
+
+.screen-center {
+    position: relative;
+    top: 50%;
+}
+
+.my-fa { font-size: 1.3em !important; }
+
+.my-fa:hover { color: red !important;}
+
+.dropdown {
+    padding: 10px 1px;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.dropdown-item {
+    display: inherit;
+    padding: 4px;
+}
+
+.dropdown-item:hover {
+    color: red !important;
+    background-color: #dbd8ce;
+}
+
+.grid-header { border: 1px solid lightblue;}
+
+.code-cut { /*tabela gridView*/
+    overflow-x: auto;
+    min-height: 330px;
+}
+
+.pagination {
+    font-size: 1.5em;
+    margin-top: 30px;
+    letter-spacing: 3mm;
+}
+
+.pagination > li > a 
+{
+    background-color: #f2f2f2;
+    margin-left: 7px;
+    margin-right:7px;
+    color: black;
+    border: 1px solid #e6e8eb;
+}
+
+.pagination > li > a:hover 
+{
+    text-decoration: none;
+    background-color: #9595b3;
+}
+
+.pagination > li > span { border: 1px solid #49a1ff; }
+
+.tools {
+    width: 40px;
+    position: fixed;
+    top: 14%;
+    left: 3%;
+}
+
+.tool {
+    width: 100%;
+    height: 40px;
+    border: 1px solid red;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background-color: yellow;
+    display: block;
+}
+
+.tool:hover {
+    width: 80px;
+    height: 80px;
+    overflow: visible;
+}
+.erase {
+    background-image: url('../Images/erase.png');
+    background-size: contain;
+}
+.restore {
+    background-image: url('../Images/restore.png');
+    background-size: contain;
+}
+.vertical-middle {
+  top:28%;
+}
+
+.table { 
+    overflow-x: auto;  
+}
+
+
+
+

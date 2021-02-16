@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <h2 class="align-center">Wybierz szablon z listy</h2>
+    <hr />
+
+    @using (Html.BeginForm("NewDocument", "App", FormMethod.Post, htmlAttributes: new { @id = "form-sbm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal align-center">
+            @{ <br />
+                @Html.DropDownList("TemplateName", new SelectList(ViewBag.Templates), "Wybierz szablon", new { @class = "form-control inline" })               
+
+                <div id="select-btn" class="btn btn-dark"> Wybierz</div> <br /> <br />
+            }
+        </div>
+    }
+
+</div>
+
+@if (ViewBag.SelectedMessage != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+        alert("@ViewBag.SelectedMessage"
+        );};
+    </script>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $('#select-btn').click(function () {
+            $('#form-sbm').submit()
+            $('#select-btn').html('<div class="btn btn-dark"><span class="spinner-border spinner-border-sm mr-2"></span> Ładowanie...</div>')
+                .attr('disabled', true);
+        });
+    </script>   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

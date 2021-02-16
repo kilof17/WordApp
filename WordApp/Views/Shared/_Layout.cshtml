@@ -1,0 +1,70 @@
+﻿@{  var identity = "";
+    if (Request.IsAuthenticated) { identity = HttpContext.Current.User.Identity.Name; }
+    var role = Roles.GetRolesForUser(identity);   
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordTemplateApp- @ViewBag.Title </title> 
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>       
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    @RenderSection("JQuery", false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark" style="position:relative;margin-bottom:20px">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     @identity
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("Logout", "Users", FormMethod.Post, new { id = "LogoutForm" }))
+                        {
+                            <a class="dropdown-item table-bordered" href="javascript:document.getElementById('LogoutForm').submit()">Wyloguj</a>
+                        }
+                    }
+                    <a class="dropdown-item table-bordered" href="/Users/ChangePassword">Zmień hasło</a>
+                    <a class="dropdown-item table-bordered" href="/Users/Edit">Edytuj profil</a>
+                </div>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav mr-auto ">
+                    <li>@Html.ActionLink("Nowy", "Index", "App", new { area = "" }, new { @class = " fa my-fa fa-home navbar-brand " })</li>
+                    <li>@Html.ActionLink("Zapisane", "MyDocs", "Files", new { area = "" }, new { @class = "fa my-fa fa-file-word-o navbar-brand" })</li> 
+                    
+                    @if (role[0] == "Admin")
+                    {
+                        <li>@Html.ActionLink(" Dodaj szablon", "UploadFile", "Upload", new { area = "" }, new { @class = "fa my-fa fa-upload navbar-brand" })</li>
+                        <li>@Html.ActionLink(" Użytkownicy", "GetAllUsers", "Admin", new { area = "" }, new { @class = "fa my-fa fa-users navbar-brand" })</li>
+                        <li>@Html.ActionLink(" Szablony", "Templates", "Files", new { area = "" }, new { @class = "fa my-fa fa-folder-open navbar-brand" })</li>
+                        <li>@Html.ActionLink(" Formaty", "Index", "Formats", new { area = "" }, new { @class = "fa my-fa fa-file navbar-brand" })</li>
+                    }    
+                </ul>                
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content  ">
+        @RenderBody()
+        <hr />
+        <footer >
+            <p>&copy; @DateTime.Now.Year </p>
+        </footer>
+    </div>      
+   
+    @RenderSection("Scripts", false)
+</body>
+</html>

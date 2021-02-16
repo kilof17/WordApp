@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Dodaj szablon";
+}
+<body >
+    <div class="screen-center">
+        <h2 class="align-center">Dodaj szablon</h2>
+
+        <hr />
+
+        @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { enctype = "multipart/form-data", @class="align-center" }))
+        {
+            <span class="row ">
+                @Html.TextBox("UploadedFile", "", new { type = "file", @class = " upload",value="Wybierz"})               
+            </span>
+            <input type="submit" value="Dodaj szablon" class="btn btn-dark upload-btn" />
+
+            <div>
+                <strong class="@ViewBag.MessageType">@ViewBag.Message</strong>
+            </div>
+
+        }
+
+    </div>
+</body>

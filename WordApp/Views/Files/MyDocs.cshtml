@@ -1,0 +1,38 @@
+﻿@model  IEnumerable<WordApp.Models.File>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Pliki";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="align-center">@ViewBag.Name</h2>
+<br />
+
+<div class="code-cut col-12 ">
+    
+    @Html.Grid(Model).Columns(Columns =>
+{
+    Columns.Add(c => c.FileName).Titled("Nazwa Pliku").Filterable(true);
+    Columns.Add(c => c.Extension).Titled("Format").Filterable(true);
+    Columns.Add().Encoded(false).Sanitized(false)
+    .RenderValueAs(p => Html.ActionLink("Pobierz", "Download", "Files", new { id = p.Hash , type = ViewBag.Type }, new { @class = "btn btn-success" }));
+    Columns.Add().Encoded(false).Sanitized(false)
+    .RenderValueAs(p => Html.ActionLink("Usuń", "Delete", "Files", new { id = p.Hash, type = ViewBag.Type },
+    new { onclick = "return confirm('Czy jesteś pewien, że chesz usunąć wybrany plik?');", @class = "btn btn-danger" }));
+
+}).WithPaging(7).Sortable(true).EmptyText("Brak zapisanych plików")
+</div>
+
+@if (!String.IsNullOrWhiteSpace(ViewBag.Message) && ViewBag.Status==true)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+@section Scripts{
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    <script src="~/Scripts/gridmvc.js"></script>
+}
