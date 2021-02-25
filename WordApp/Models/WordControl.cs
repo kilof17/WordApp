@@ -2,16 +2,11 @@
 
 namespace WordApp.Models
 {
-    public class Control 
-    {
-        public int ID { get; set; } 
-        public string ControlId { get; set; }
-        public string Title { get; set; }
-        public string Text { get; set; }                
+    public class WordControl : BaseControl
+    {                        
         public int Type { get; set; }
         public string Tag { get; set; }
-        public List<string> Dropdown { get; set; }
-        public bool Checked { get; set;} 
+        public List<string> Dropdown { get; set; }       
         public bool Multiline { get; set; }
     }
 }

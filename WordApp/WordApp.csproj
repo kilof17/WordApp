@@ -118,10 +118,6 @@
     <Reference Include="Unity.Mvc5, Version=1.4.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Mvc5.1.4.0\lib\net45\Unity.Mvc5.dll</HintPath>
     </Reference>
-    <Reference Include="VBIDEApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=a3637beacf571e8a, processorArchitecture=MSIL">
-      <HintPath>..\packages\NetOffice.Core.1.7.4.4\lib\net45\VBIDEApi.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure">
@@ -287,6 +283,7 @@
       <DependentUpon>202102121453048_DeleteDBcontrolExtaColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BaseControl.cs" />
     <Compile Include="Models\DBcontrol.cs" />
     <Compile Include="Repositories\ControlsRepository.cs" />
     <Compile Include="Repositories\FilesRepository.cs" />
@@ -299,7 +296,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\File.cs" />
-    <Compile Include="Models\Control.cs" />
+    <Compile Include="Models\WordControl.cs" />
     <Compile Include="Models\ExtendUsers\Users.cs" />
     <Compile Include="Models\Format.cs" />
     <Compile Include="Models\Role.cs" />

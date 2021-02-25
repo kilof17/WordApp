@@ -20,7 +20,7 @@
             @for (var i = 0; i < Model.AllControls.Count; i++)
             {
                 <div>
-                    @Html.HiddenFor(m => m.AllControls[i].ControlId)
+                    @Html.HiddenFor(m => m.AllControls[i].Control_ID)
                     @Html.HiddenFor(m => m.AllControls[i].Type)
                     @Html.HiddenFor(m => m.AllControls[i].Title)
                     @Html.HiddenFor(m => m.AllControls[i].Tag)

@@ -4,9 +4,8 @@ using WordApp.Models;
 namespace WordApp.DataAccessLayer
 {
     public interface IControlsRepository
-    {
-        IEnumerable<DBcontrol> GetUserControlsFromDb(int id);   
-        IEnumerable<Control> GetControlsFromDb(List<Control> controls);
-        bool SaveContols(List<Control> controls);
+    {        
+        IEnumerable<WordControl> GetControlsFromDb(List<WordControl> controls);
+        bool SaveContols(List<WordControl> controls);
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using WordApp.Models;
 
 namespace WordApp.DataAccessLayer
@@ -10,13 +8,17 @@ namespace WordApp.DataAccessLayer
     {
         private readonly WordAppEntities _context;
 
+        #region ctor
+
         public ControlsRepository(WordAppEntities wordAppEntities)
         {
             _context = wordAppEntities;
         }
 
+        #endregion
+
         #region Get controls from Database 
-        public IEnumerable<Control> GetControlsFromDb( List<Control> controls )
+        public IEnumerable<WordControl> GetControlsFromDb( List<WordControl> controls )
         {
             string nickname = System.Web.HttpContext.Current.User.Identity.Name;
             var user = _context.Users.Where(x => x.Nickname == nickname).First();
@@ -36,15 +38,8 @@ namespace WordApp.DataAccessLayer
         }
         #endregion
      
-
-        public IEnumerable<DBcontrol> GetUserControlsFromDb(int id)
-        {
-            List<DBcontrol> userControls = _context.DBcontrols.Where(x => x.Users.Id== id).ToList();
-           return userControls;
-        }
-
         #region Save in Database    
-        public bool SaveContols(List<Control> controls)
+        public bool SaveContols(List<WordControl> controls)
         {            
             string userNick = System.Web.HttpContext.Current.User.Identity.Name;
 
@@ -61,7 +56,7 @@ namespace WordApp.DataAccessLayer
                     {
                         isExist.Title = controls[i].Title;
                         isExist.Text = controls[i].Text;
-                        isExist.Control_ID = controls[i].ControlId;                        
+                        isExist.Control_ID = controls[i].Control_ID;                        
                         isExist.Users.Id = user.Id;
                         isExist.Checked = controls[i].Checked;
                     }
@@ -71,7 +66,7 @@ namespace WordApp.DataAccessLayer
                         {
                             Title = controls[i].Title,
                             Text = controls[i].Text,
-                            Control_ID = controls[i].ControlId,
+                            Control_ID = controls[i].Control_ID,
                             Checked = controls[i].Checked,
                             Users = user
                         };

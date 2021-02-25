@@ -8,7 +8,7 @@ namespace WordApp.ViewModels
 {
     public class AppNewDocumentViewModel
     {
-        public List<Control> AllControls { get; set; }
+        public List<WordControl> AllControls { get; set; }
         public List<Format> AllFormats { get; set; }
     }
 }

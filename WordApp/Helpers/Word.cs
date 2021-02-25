@@ -39,7 +39,7 @@ namespace WordApp
         #endregion
 
         #region Save
-        public string SaveDocument( List<Control>controls, File template, Format format) // save formats https://docs.microsoft.com/pl-pl/dotnet/api/microsoft.office.interop.word.wdsaveformat?view=word-pia 
+        public string SaveDocument( List<WordControl>controls, File template, Format format) // save formats https://docs.microsoft.com/pl-pl/dotnet/api/microsoft.office.interop.word.wdsaveformat?view=word-pia 
         {
             string userNick = System.Web.HttpContext.Current.User.Identity.Name;
 
@@ -53,7 +53,7 @@ namespace WordApp
 
                 for ( int i = 0; i < controls.Count; i++ )
                 {
-                    if ( cc.ID == controls[i].ControlId )
+                    if ( cc.ID == controls[i].Control_ID )
                     {
                         notExist = false;
 
@@ -83,18 +83,18 @@ namespace WordApp
         #endregion
 
         #region Get controls from template       
-        public List<Control> GetContorlsFromTemplate(object templatePath)
+        public List<WordControl> GetContorlsFromTemplate(object templatePath)
         {
-            List<Control> controls = new List<Control>();
+            List<WordControl> controls = new List<WordControl>();
 
             RunWord(templatePath); // may demand type casting (object)file.FilePath
             foreach (wordInt.ContentControl cc in myDoc.ContentControls)
             {
                 if (cc.Type != 0 && cc.Title != null)// is not the selected text
                 {
-                    Control control = new Control()
+                    WordControl control = new WordControl()
                     {
-                        ControlId = cc.ID,   
+                        Control_ID = cc.ID,   
                         Title = cc.Title,
                         Tag = cc.Tag,
                         Type = (int)cc.Type,
